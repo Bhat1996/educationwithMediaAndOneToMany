@@ -6,6 +6,7 @@ import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MediaType;
 import org.apache.tika.parser.AutoDetectParser;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,9 +26,6 @@ public final class TikaFileUtils {
             MediaType mediaType = detector.detect(stream, metadata);
             return mediaType.toString();
         } catch (IOException e) {
-            if (log.isWarnEnabled()) {
-                log.warn("Exception In Detecting File Type Of:: {}", file.getOriginalFilename());
-            }
             return file.getContentType();
         }
     }

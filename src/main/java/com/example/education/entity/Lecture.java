@@ -4,8 +4,6 @@ package com.example.education.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.MediaType;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "lectures")
@@ -14,7 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class Lecture {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lectures_gen")
+    @SequenceGenerator(
+            name = "lectures_gen",
+            sequenceName = "lectures_seq",
+            allocationSize = 1
+    )
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "notes" ,columnDefinition = "TEXT")

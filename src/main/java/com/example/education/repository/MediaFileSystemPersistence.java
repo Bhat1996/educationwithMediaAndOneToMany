@@ -29,16 +29,16 @@ public class MediaFileSystemPersistence {
     @PostConstruct
     void init() {
         homeDirectory = System.getProperty("user.home");
-        log.info("Home Directory: {}", homeDirectory);
+//        log.info("Home Directory: {}", homeDirectory);
         Path path = Paths.get(homeDirectory, DIRECTORY);
         try {
             boolean folderPathExists = Files.exists(path);
             if (!folderPathExists) {
-                log.info("Creating directory on Path: {}", path.toAbsolutePath());
+//                log.info("Creating directory on Path: {}", path.toAbsolutePath());
                 Files.createDirectories(path);
             }
         } catch (IOException e) {
-            log.error("Error while creating directory", e);
+//            log.error("Error while creating directory", e);
             throw new RuntimeException( "Could not create directory", e);
         }
     }
@@ -64,7 +64,7 @@ public class MediaFileSystemPersistence {
 
             return savedMedia.getId();
         } catch (IOException e) {
-            log.error("Error while writing file to file system", e);
+//            log.error("Error while writing file to file system", e);
             throw new RuntimeException( "Could not write file to file system", e);
         }
     }
@@ -74,11 +74,12 @@ public class MediaFileSystemPersistence {
             Path path = Paths.get(filePath);
             boolean filePathExists = Files.exists(path);
             if (!filePathExists) {
-                log.info("Creating directory on Path: {}", path.toAbsolutePath());
+//                log.info("Creating directory on Path: {}", path.toAbsolutePath());
+                System.out.println(path.toAbsolutePath());
             }
             return Files.readAllBytes(path);
         } catch (IOException e) {
-            log.error("Error while writing file to file system", e);
+//            log.error("Error while writing file to file system", e);
             throw new RuntimeException( "Could not write file to file system", e);
         }
     }
